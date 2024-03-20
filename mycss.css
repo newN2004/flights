@@ -1,4 +1,5 @@
 
+
 	body{
 			font-family: 'Poppins', sans-serif;
 
@@ -15,13 +16,13 @@
 	.carousel-caption h2 {
     font-size: 9rem;
     margin-bottom: 0;
-    color: #FFF;
+    color: 969797;
     font-weight: 300;
 }
 
 	
 	.carousel-caption p {
-	 color: rgba(255, 255, 255, 0.65);
+	 color: rgba(158, 21, 21, 0.65);
     text-transform: uppercase;
     font-size: 3rem;
     font-weight: 300;
@@ -31,7 +32,7 @@
 	}
 
 	 header{
-		color: white;
+		color: rgb(19,18,18);
 
 	}
 
@@ -43,7 +44,7 @@
 
 	#footer {
 		padding: 4rem 0 2rem 0 ;
-		background: #000;
+		background: #a17373;
 		text-align: center;
 		width: 100% !important;
 		bottom: 0;
@@ -53,6 +54,7 @@
 				display: inline-block;
 				padding: 0 2rem 0 0;
 				font-size: 36px;
+				color:#fff;
 			}	
 
 
@@ -62,8 +64,8 @@
 
 
 	.background-wrapper {
-			background-color: #000;
-			color: #bfbfbf;
+			background-color: #e6dfdf;
+			color: #fff;
 			
 			background-size: cover;
 			background-attachment: fixed;
