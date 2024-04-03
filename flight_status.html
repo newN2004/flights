@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Status Tracker</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 20px;
+    color: #007bff;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  label {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #555;
+  }
+  input[type="text"] {
+    padding: 10px;
+    width: 80%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  #status {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #333;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+  }
+  th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #007bff;
+    color: #fff;
+  }
+  td.cancel-btn button {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  td.cancel-btn button:hover {
+    background-color: #c82333;
+  }
+  /* SVG Animation */
+  .bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  .circle {
+    fill: aqua; /* Change fill color to aqua */
+    animation: moveCircle 8s infinite linear alternate;
+  }
+  @keyframes moveCircle {
+    from {
+      transform: translateX(-50%) translateY(-50%);
+    }
+    to {
+      transform: translateX(50%) translateY(50%);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- SVG Animation -->
+<svg class="bg-animation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle class="circle" cx="50" cy="50" r="50"/>
+</svg>
+
+<div class="container">
+  <h1>Flight Status Tracker</h1>
+  <form id="flightForm">
+    <label for="flightNumber">Enter Flight Number:</label>
+    <input type="text" id="flightNumber" placeholder="e.g., AA123">
+    <button type="submit">Track</button>
+  </form>
+  <div id="status"></div>
+
+  <h2>Booked Flights</h2>
+  <table id="bookedFlights">
+    <thead>
+      <tr>
+        <th>Flight Number</th>
+        <th>Status</th>
+        <th>Arrival Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Table content will be added dynamically -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  document.getElementById('flightForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var flightNumber = document.getElementById('flightNumber').value.toUpperCase();
+    var statusElement = document.getElementById('status');
+    
+    // Simulating flight status
+    var status = Math.random() < 0.5 ? 'On Time' : 'Delayed';
+    var arrivalTime = new Date();
+    arrivalTime.setHours(arrivalTime.getHours() + Math.floor(Math.random() * 6) + 1);
+    arrivalTime.setMinutes(Math.floor(Math.random() * 60));
+    
+    // Displaying flight status
+    statusElement.innerHTML = `Flight ${flightNumber}: ${status}. Approximate arrival time: ${arrivalTime.toLocaleTimeString()}`;
+
+    // Add the booked flight to the table
+    var tableBody = document.querySelector('#bookedFlights tbody');
+    var row = tableBody.insertRow();
+    row.innerHTML = `
+      <td>${flightNumber}</td>
+      <td>${status}</td>
+      <td>${arrivalTime.toLocaleTimeString()}</td>
+      <td class="cancel-btn"><button onclick="cancelFlight('${flightNumber}', this)">Cancel</button></td>
+    `;
+  });
+
+  function cancelFlight(flightNumber, button) {
+    // Remove the row from the table
+    var row = button.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+    // Redirect to cancellation page with flight details
+    window.location.href = `cancellation_page.html?flight=${flightNumber}`;
+  }
+</script>
+
+</body>
+</html>
