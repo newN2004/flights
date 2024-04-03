@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Cancellation</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    max-width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 20px;
+    color: #007bff;
+  }
+  p {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #555;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: #c82333;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Flight Cancellation</h1>
+  <p>Are you sure you want to cancel the following flight?</p>
+  <div id="flightDetails"></div>
+  <button onclick="confirmCancellation()">Confirm Cancellation</button>
+</div>
+
+<script>
+  // Retrieve flight number from query parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const flightNumber = urlParams.get('flight');
+
+  // Display flight details
+  document.getElementById('flightDetails').innerHTML = `<p>Flight Number: ${flightNumber}</p>`;
+
+  function confirmCancellation() {
+    // You can perform further actions here, like making an API call to cancel the flight
+    alert(`Flight ${flightNumber} has been cancelled.`);
+    // Redirect back to the main page
+    window.location.href = 'index.html';
+  }
+</script>
+
+</body>
+</html>
